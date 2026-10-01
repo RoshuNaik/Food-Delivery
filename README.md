@@ -1,133 +1,124 @@
 # Food-Delivery
 Food Delivery System using Python and Streamlit
 
-README
-🍔 Food Delivery OOP Project
-🚀 Live Demo: https://food-delivery-4vvzuk2ndranttfmrdbyna.streamlit.app/
+# 🍔 Food Delivery System — OOP Python + Streamlit
 
-A simple Food Delivery System built using Object-Oriented Programming in Python and Streamlit.# Food-Delivery Food Delivery System using Python and Streamlit
+A simple and interactive **Food Delivery Management System** built using **Object-Oriented Programming (OOP) in Python** with a **Streamlit web interface**.
 
-🍽️ Food Delivery System
-An object-oriented food delivery engine in pure Python
-Python Paradigm Dependencies Interface
+The project demonstrates how real-world food delivery workflows can be modelled using classes, objects, inheritance, abstraction, encapsulation, and method-based interactions.
 
-Register. Order. Pay. Verify. Deliver.
+## 🚀 Live Demo
 
-✨ Overview
-Food Delivery System models the core workflow of apps like Swiggy or Zomato using clean, well-structured object-oriented Python. It covers the full journey of an order: from registering users and building a restaurant menu, to calculating the bill, accepting the order, verifying an OTP at the doorstep, and notifying everyone involved.
+👉 **https://food-delivery-4vvzuk2ndranttfmrdbyna.streamlit.app/**
 
-It uses only the Python standard library, so there is nothing to install.
+Try the application directly in your browser without installing anything.
 
-🎯 Highlights
-Feature	Details
-👤	User registration	Customers and delivery partners share a common abstract User base
-💰	Wallet top-up	Zero or positive amounts are credited; negative amounts are rejected
-🍛	Menu management	Restaurants hold MenuItem objects with price and veg/non-veg flag
-🧾	Automatic billing	Subtotal + 5% GST + ₹20 packaging fee
-🔐	OTP-verified delivery	A wrong OTP leaves the order Accepted and the partner busy
-🔔	Role-specific notifications	Customers and partners see differently worded messages (polymorphism)
-🚦	Order lifecycle	Placed → Accepted → Delivered
-🧭 System Flow
+---
 
-🏗️ Architecture
+## 📌 Project Overview
 
-Order lifecycle
+This project simulates a basic food delivery workflow starting from customer creation and wallet management to placing an order, assigning a delivery partner, verifying an OTP, and completing the delivery.
 
-OOP concepts demonstrated
-Abstraction: User is an abstract base class (ABC) and cannot be instantiated directly.
-Inheritance: Customer and DeliveryPartner extend User and reuse its wallet logic.
-Polymorphism: notify() and display_profile() behave differently for each user type.
-Encapsulation: internal state such as _wallet_balance, _menu, _status, and _otp is kept non-public by convention.
-Composition: a Restaurant holds MenuItem objects, and an Order holds the items selected.
-🧾 Billing Rule
-Total = Subtotal + (Subtotal × 5% GST) + ₹20 packaging fee
-Example: Biryani (₹250) + Kebab (₹180)
+### 🔄 Complete Workflow
 
-Component	Amount
-Subtotal	₹430.00
-GST (5%)	₹21.50
-Packaging fee	₹20.00
-Total	₹471.50
-Estimated delivery time is a fixed 30 minutes.
+```text
+Create Customer
+      ↓
+Add Wallet Balance
+      ↓
+View Restaurant Menu
+      ↓
+Select Food Items
+      ↓
+Place Order
+      ↓
+Create Delivery Partner
+      ↓
+Accept Order
+      ↓
+Enter OTP
+      ↓
+Complete Delivery
+```
 
-🚀 Getting Started
-Prerequisites
-Python 3.8 or newer
-No third-party packages required
-Run the demo
-# 1. Get the project files into one folder
-#    food_delivery.py   (all class definitions)
-#    demo.py            (end-to-end demonstration)
+---
 
-# 2. Run
-python demo.py
-Note: demo.py must import the classes at the top with from food_delivery import *.
+## ✨ Features
 
-Sample output
-Total Bill: ₹471.5
-Estimated Time: 30 mins
-Rajesh has accepted the order.
-Incorrect OTP! Order not delivered.
-OTP verified. Order delivered by Rajesh.
-Notification for Priya: Order delivered successfully.
-Delivery Partner Rajesh Notification: Delivery complete, you are now available.
-💻 Usage Example
-from food_delivery import Customer, DeliveryPartner, Restaurant, MenuItem
+### 👤 Customer Management
+- Create a customer profile
+- Store customer name, phone number and address
+- Maintain wallet balance
+- Add money to the customer wallet
 
-# Register users
-priya = Customer("Priya", "9876543210", "Bangalore")
-rajesh = DeliveryPartner("Rajesh", "9998887776", "Bike")
+### 🍽️ Restaurant & Menu
+- Restaurant information
+- Multiple menu items
+- Veg / Non-Veg classification
+- Display item prices
+- Interactive menu selection
 
-# Build a restaurant menu
-bawarchi = Restaurant("Bawarchi", "MG Road")
-biryani = MenuItem("Biryani", 250, is_veg=False)
-kebab = MenuItem("Kebab", 180, is_veg=False)
-bawarchi.add_item(biryani)
-bawarchi.add_item(kebab)
+### 🛒 Order Management
+- Select multiple food items
+- Place an order
+- Automatically generate an Order ID
+- Calculate:
+  - Subtotal
+  - GST
+  - Packaging fee
+  - Total bill
+- Display estimated delivery time
+- Track order status
 
-# Wallet top-up (negative amounts are ignored)
-priya.add_to_wallet(500)
-priya.add_to_wallet(-100)
+### 🛵 Delivery Partner
+- Create a delivery partner
+- Store phone number and vehicle details
+- Track availability
+- Accept customer orders
 
-# Place an order and check the bill
-order = priya.place_order(bawarchi, [biryani, kebab])
-print(order.calculate_bill())      # 471.5
+### 🔐 OTP Verification
+- Generate an order OTP
+- Verify OTP before delivery
+- Prevent delivery with an incorrect OTP
 
-# Deliver with OTP verification
-rajesh.accept_order(order)
-rajesh.deliver(order, 9999)        # rejected
-rajesh.deliver(order, 1234)        # delivered
+### 📦 Delivery Tracking
+Order status progresses through the delivery workflow:
 
-# Notify both parties
-priya.notify("Order delivered successfully.")
-rajesh.notify("Delivery complete, you are now available.")
-📁 Project Structure
-food-delivery-system/
-├── food_delivery.py   # User, Customer, DeliveryPartner, MenuItem, Restaurant, Order
-├── demo.py            # End-to-end demonstration of the full workflow
-└── README.md          # You are here
-📚 API Reference
-Class	Key members
-User (abstract)	add_to_wallet(amount), notify(message), display_profile()
-Customer	address, order_history, place_order(restaurant, items)
-DeliveryPartner	vehicle, is_available, rating, accept_order(order), deliver(order, otp)
-MenuItem	name, price, is_veg
-Restaurant	name, location, add_item(item), get_menu(), is_open()
-Order	calculate_bill(), estimated_time(), update_status(status), verify_otp(otp)
-🛣️ Roadmap
- Deduct the bill from the customer's wallet, with an insufficient-balance check
- Validate that ordered items belong to the restaurant's menu and that it is_open()
- Print a full bill breakdown (subtotal, GST, packaging fee)
- Generate a unique OTP per order instead of a fixed value
- Delivery partner ratings and assignment of available partners
- Streamlit web interface on top of the existing classes
- Unit tests with unittest or pytest
-🎓 What I Learned
-Designing a small system from scratch with abstract base classes, inheritance, and composition, and keeping each class focused on one responsibility.
+```text
+Placed → Accepted → Delivered
+```
 
-👤 Author
-Shweta Vanarse, built as Food Delivery System.
+### 🌐 Streamlit Interface
+- Clean and simple web interface
+- Interactive forms and buttons
+- Session state for maintaining application data
+- Real-time order and delivery status
 
-⭐ If you found this project helpful, consider giving it a star!
+---
+
+## 🧠 OOP Concepts Demonstrated
+
+The project is designed to demonstrate important Object-Oriented Programming concepts.
+
+| OOP Concept | Implementation |
+|---|---|
+| **Class & Object** | `Customer`, `Restaurant`, `Order`, `MenuItem`, `DeliveryPartner` |
+| **Inheritance** | `Customer` and `DeliveryPartner` inherit from `User` |
+| **Abstraction** | `User` uses abstract methods |
+| **Encapsulation** | Internal attributes such as wallet balance and order status |
+| **Polymorphism** | `notify()` and `display_profile()` are implemented by different subclasses |
+| **Methods** | Order placement, wallet management, OTP verification and delivery |
+
+---
+
+## 🏗️ Project Structure
+
+```text
+Food-Delivery/
+│
+├── app.py
+├── food_delivery.py
+├── streamlit_app.py
+├── Food_Delivery_System_Not
 
 
