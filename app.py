@@ -1,5 +1,5 @@
 import streamlit as st
-from food_delivery import Customer, Restaurant, MenuItem, DeliveryPartner
+from food_delivery import Customer, DeliveryPartner, MenuItem, Restaurant
 
 st.set_page_config(page_title="Food Delivery App", page_icon="🍔")
 st.title("🍔 OOP Food Delivery App")
